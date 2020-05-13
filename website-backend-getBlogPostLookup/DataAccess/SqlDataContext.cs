@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Data.SqlClient;
-using System.Collections.Generic;
 using System.Text;
+using System.Collections.Generic;
 using Amazon.Lambda.Core;
 
 using Npgsql;
@@ -34,7 +33,9 @@ namespace website_backend_getBlogPostLookup.DataAccess
       {
         using (var command = new NpgsqlCommand($"SELECT * from public.blogpostid_slug", Connection))
         {
+          LambdaLogger.Log("before connection open");
           Connection.Open();
+          LambdaLogger.Log("after connection open");
           var reader = command.ExecuteReader();
 
           while (reader.Read())
@@ -50,6 +51,7 @@ namespace website_backend_getBlogPostLookup.DataAccess
         LambdaLogger.Log(_exceptionLogFormatter.FormatExceptionLogMessage(ex));
       }
 
+      Connection.Close();
       return blogPostLookup;
     }
 

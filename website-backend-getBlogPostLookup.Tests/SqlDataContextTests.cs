@@ -1,15 +1,12 @@
 ﻿using System;
+using Microsoft.Extensions.Configuration;
 
 using Moq;
 using Xunit;
 
-using Amazon.Lambda.Core;
-
 using website_backend_getBlogPostLookup.Utility;
 using website_backend_getBlogPostLookup.DataAccess;
 using website_backend_getBlogPostLookup.Configuration;
-using Microsoft.Extensions.Configuration;
-using Microsoft.VisualBasic.CompilerServices;
 
 namespace website_backend_getBlogPostLookup.Tests
 { 

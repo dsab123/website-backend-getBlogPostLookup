@@ -1,25 +1,20 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Microsoft.Extensions.DependencyInjection;
 
-using Newtonsoft.Json;
 using Amazon.Lambda.Core;
-using Newtonsoft.Json.Serialization;
+using website_backend_getBlogPostLookup.Models;
 using website_backend_getBlogPostLookup.Utility;
 using website_backend_getBlogPostLookup.DataAccess;
 using website_backend_getBlogPostLookup.Configuration;
-using website_backend_getBlogPostLookup.Models;
 
-// Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
-[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
+[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.CamelCaseLambdaJsonSerializer))]
 
 namespace website_backend_getBlogPostLookup
 {
   public class Function
   {
     public ISqlDataContext DataContext;
-
     private readonly IExceptionLogFormatter _exceptionLogFormatter;
 
     public Function()
@@ -36,15 +31,15 @@ namespace website_backend_getBlogPostLookup
     /// Entry point to retrieve json-formatted lookup table mapping BlogPost ids to slugs, from
     /// cross-reference table in RDS
     /// </summary>
-    /// <param name="input"></param>
     /// <param name="context"></param>
     /// <returns></returns>
-    public List<BlogPostIdXSlug> FunctionHandler(string input, ILambdaContext context)
+    public List<BlogPostIdXSlug> FunctionHandler(ILambdaContext context)
     {
       LambdaLogger.Log("getBlogPostLookup Lambda Started");
 
       try
       {
+        LambdaLogger.Log("getBlogPostLookup Lambda finishing");
         return DataContext.GetBlogPostLookup();
       }
       catch (Exception ex)
@@ -65,7 +60,7 @@ namespace website_backend_getBlogPostLookup
     public static void Main()
     {
       var ret =  new Function();
-      ret.FunctionHandler("something", null);
+      ret.FunctionHandler(null);
     }
   }
 }

@@ -1,12 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-using Xunit;
-using Amazon.Lambda.Core;
-using Amazon.Lambda.TestUtilities;
 using Moq;
+using Xunit;
 using website_backend_getBlogPostLookup.DataAccess;
 using website_backend_getBlogPostLookup.Models;
 
@@ -50,7 +45,7 @@ namespace website_backend_getBlogPostLookup.Tests
       var function = new FunctionExtractAndOverride();
 
       // Act
-      var ret = function.FunctionHandler(string.Empty, null);
+      var ret = function.FunctionHandler(null);
 
       // Assert
       Assert.Equal(4, ret.Count);

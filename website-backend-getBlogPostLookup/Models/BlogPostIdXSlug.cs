@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace website_backend_getBlogPostLookup.Models
 {
@@ -10,6 +9,7 @@ namespace website_backend_getBlogPostLookup.Models
     [JsonProperty(PropertyName = "slug")]
     public string Slug { get; set; }
 
+    [JsonConstructor]
     public BlogPostIdXSlug(int id, string slug)
     {
       Id = id;
