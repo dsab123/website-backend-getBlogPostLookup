@@ -53,7 +53,11 @@ namespace website_backend_getBlogPostLookup.Tests
       var ret = function.FunctionHandler(string.Empty, null);
 
       // Assert
-      Assert.Equal("[{\"Id\":1,\"Slug\":\"slugOne\"},{\"Id\":2,\"Slug\":\"slugTwo\"},{\"Id\":3,\"Slug\":\"slugThree\"},{\"Id\":4,\"Slug\":\"slugFour\"}]", ret);
+      Assert.Equal(4, ret.Count);
+      Assert.Equal("slugOne", ret[0].Slug);
+      Assert.Equal("slugTwo", ret[1].Slug);
+      Assert.Equal("slugThree", ret[2].Slug);
+      Assert.Equal("slugFour", ret[3].Slug);
     }
   }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,6 +9,7 @@ using Newtonsoft.Json.Serialization;
 using website_backend_getBlogPostLookup.Utility;
 using website_backend_getBlogPostLookup.DataAccess;
 using website_backend_getBlogPostLookup.Configuration;
+using website_backend_getBlogPostLookup.Models;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
@@ -37,19 +39,16 @@ namespace website_backend_getBlogPostLookup
     /// <param name="input"></param>
     /// <param name="context"></param>
     /// <returns></returns>
-    public string FunctionHandler(string input, ILambdaContext context)
+    public List<BlogPostIdXSlug> FunctionHandler(string input, ILambdaContext context)
     {
       LambdaLogger.Log("getBlogPostLookup Lambda Started");
 
-      var blogPostLookup = DataContext.GetBlogPostLookup();
-
       try
       {
-        return JsonConvert.SerializeObject(blogPostLookup);
+        return DataContext.GetBlogPostLookup();
       }
       catch (Exception ex)
       {
-        LambdaLogger.Log(blogPostLookup.ToString());
         LambdaLogger.Log(_exceptionLogFormatter.FormatExceptionLogMessage(ex));
         throw;
       }
