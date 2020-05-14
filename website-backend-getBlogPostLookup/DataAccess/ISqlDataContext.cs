@@ -6,6 +6,6 @@ namespace website_backend_getBlogPostLookup.DataAccess
 {
   public interface ISqlDataContext
   {
-    List<BlogPostIdXSlug> GetBlogPostLookup();
+    List<BlogPostInfo> GetBlogPostLookup();
   }
 }

@@ -28,12 +28,11 @@ namespace website_backend_getBlogPostLookup
     }
 
     /// <summary>
-    /// Entry point to retrieve json-formatted lookup table mapping BlogPost ids to slugs, from
-    /// cross-reference table in RDS
+    /// Entry point to retrieve BlogPost information from database
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    public List<BlogPostIdXSlug> FunctionHandler(ILambdaContext context)
+    public List<BlogPostInfo> FunctionHandler(ILambdaContext context)
     {
       LambdaLogger.Log("getBlogPostLookup Lambda Started");
 

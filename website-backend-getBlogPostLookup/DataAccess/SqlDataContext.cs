@@ -25,13 +25,13 @@ namespace website_backend_getBlogPostLookup.DataAccess
     }
 
     // TODO - genericize the input model so that this can be reused in a Lambda Layer
-    public List<BlogPostIdXSlug> GetBlogPostLookup()
+    public List<BlogPostInfo> GetBlogPostLookup()
     {
-      var blogPostLookup = new List<BlogPostIdXSlug>();
+      var blogPostLookup = new List<BlogPostInfo>();
 
       try
       {
-        using (var command = new NpgsqlCommand($"SELECT * from public.blogpostid_slug", Connection))
+        using (var command = new NpgsqlCommand($"SELECT * from public.blogpostInfo", Connection))
         {
           LambdaLogger.Log("before connection open");
           Connection.Open();
@@ -42,7 +42,9 @@ namespace website_backend_getBlogPostLookup.DataAccess
           {
             var id = int.Parse(reader["blogpost_id"].ToString());
             var slug = reader["slug"].ToString();
-            blogPostLookup.Add(new BlogPostIdXSlug(id, slug));
+            var title = reader["title"].ToString();
+            var teaser = reader["teaser"].ToString();
+            blogPostLookup.Add(new BlogPostInfo(id, slug, title, teaser));
           }
         }
       }

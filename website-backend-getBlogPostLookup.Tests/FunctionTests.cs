@@ -9,8 +9,6 @@ namespace website_backend_getBlogPostLookup.Tests
 {
   public class FunctionTests
   {
-    private readonly FunctionExtractAndOverride _function;
-
     // we need to override the constructor so that we don't do any of that snazzy configuration,
     // and also to set the dataContext in an easier manner
     private class FunctionExtractAndOverride : Function
@@ -21,12 +19,12 @@ namespace website_backend_getBlogPostLookup.Tests
       {
         _mockContext = new Mock<ISqlDataContext>();
         _mockContext.Setup(c => c.GetBlogPostLookup())
-          .Returns(new List<BlogPostIdXSlug>
+          .Returns(new List<BlogPostInfo>
           {
-            new BlogPostIdXSlug(1, "slugOne"),
-            new BlogPostIdXSlug(2, "slugTwo"),
-            new BlogPostIdXSlug(3, "slugThree"),
-            new BlogPostIdXSlug(4, "slugFour")
+            new BlogPostInfo(1, "slugOne", "title", "teaser"),
+            new BlogPostInfo(2, "slugTwo", "title", "teaser"),
+            new BlogPostInfo(3, "slugThree", "title", "teaser"),
+            new BlogPostInfo(4, "slugFour", "title", "teaser")
           });
 
         DataContext = _mockContext.Object;

@@ -2,18 +2,25 @@
 
 namespace website_backend_getBlogPostLookup.Models
 {
-  public class BlogPostIdXSlug
+  public class BlogPostInfo
   {
     [JsonProperty(PropertyName = "id")]
     public int Id { get; set; }
     [JsonProperty(PropertyName = "slug")]
     public string Slug { get; set; }
+    [JsonProperty(PropertyName = "title")]
+    public string Title { get; set; }
+    [JsonProperty(PropertyName = "teaser")]
+    public string Teaser { get; set; }
+
 
     [JsonConstructor]
-    public BlogPostIdXSlug(int id, string slug)
+    public BlogPostInfo(int id, string slug, string title, string teaser)
     {
       Id = id;
       Slug = slug;
+      Title = title;
+      Teaser = teaser;
     }
   }
 }
