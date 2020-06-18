@@ -31,11 +31,6 @@ namespace website_backend_getBlogPostLookup.Tests
       }
     } 
 
-    public FunctionTests()
-    {
-      _function = new FunctionExtractAndOverride();
-    }
-
     [Fact]
     public void FunctionHandler_ContextReturnsValidList_JsonSerializationIsValid()
     {
